@@ -13,9 +13,6 @@ namespace PageCounter
         public int WidthResolution { get; private set; }
         public int HeightResolution { get; private set; }
 
-        public double Width { get; set; }
-        public double Height { get; set; }
-
         public InputDoc(int pixelsWidth, int pixelsHeight, int widthResolution, int heightResolution)
         {
             PixelsWidth = pixelsWidth;

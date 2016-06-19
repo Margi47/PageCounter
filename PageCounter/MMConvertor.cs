@@ -8,22 +8,15 @@ namespace PageCounter
 {
     public class MMConvertor : IConvertor
     {
-        public double MaxWidth { get; set; }
-        public double MaxHeight { get; set; }
+        public override double MaxSquare { get; set; }
+
+        public override double Inaccuracy { get; set; }
 
         public MMConvertor()
         {
-            MaxWidth = 210;
-            MaxHeight = 297;
+            MaxSquare = 62370;
+            Inaccuracy = 2535;
         }
-
-        public void Convert(InputDoc[] doc)
-        {
-            foreach (var page in doc)
-            {
-                page.Width = page.PixelsWidth / page.WidthResolution;
-                page.Height = page.PixelsHeight / page.HeightResolution;
-            }
-        }
+        
     }
 }

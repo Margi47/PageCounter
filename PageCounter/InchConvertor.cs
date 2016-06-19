@@ -8,22 +8,15 @@ namespace PageCounter
 {
     public class InchConvertor : IConvertor
     {
-        public double MaxWidth { get; set; }
-        public double MaxHeight { get; set; }
+        public override double MaxSquare { get; set; }
+
+        public override double Inaccuracy { get; set; }
 
         public InchConvertor()
         {
-            MaxWidth = 8.3;
-            MaxHeight = 11.7;
+            MaxSquare = 97.11;
+            Inaccuracy = 4;
         }
 
-        public void Convert(InputDoc[] doc)
-        {
-            foreach (var page in doc)
-            {
-                page.Width = page.PixelsWidth / page.WidthResolution;
-                page.Height = page.PixelsHeight / page.HeightResolution;
-            }
-        }
     }
 }

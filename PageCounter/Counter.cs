@@ -8,11 +8,9 @@ namespace PageCounter
 {
     public class Counter
     {
-        
-
-        public int CountPages(InputDoc[] doc, MeasurementUnit unit)
+        public IConvertor SelectConventor(MeasurementUnit unit)
         {
-            IConvertor conventor=default(IConvertor);
+            IConvertor conventor = default(IConvertor);
             if (unit == MeasurementUnit.Inches)
             {
                 conventor=new InchConvertor();
@@ -21,22 +19,21 @@ namespace PageCounter
             {
                 conventor = new MMConvertor();
             }
+            return conventor;
+        }
 
-            conventor.Convert(doc);
+        public int CountPages(InputDoc[] doc, MeasurementUnit unit)
+        {
+            IConvertor conventor=SelectConventor(unit);
+            double[] square = conventor.Convert(doc);
 
             int count = 0;
-            foreach (var page in doc)
+            for (int i=0; i<square.Length; i++)
             {
                 count++;
-                while (page.Height > conventor.MaxHeight)
+                while ( square[i] > conventor.MaxSquare+conventor.Inaccuracy)
                 {
-                    page.Height -= conventor.MaxHeight;
-                    count++;
-                }
-
-                while (page.Width > conventor.MaxWidth)
-                {
-                    page.Width -= conventor.MaxWidth;
+                    square[i] -= conventor.MaxSquare;
                     count++;
                 }
             }
